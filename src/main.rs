@@ -3,7 +3,10 @@ mod run;
 mod solns;
 
 use clap::{Parser, Subcommand};
-use std::{fs::File, io::Write};
+use std::{
+    fs::{File, OpenOptions},
+    io::Write,
+};
 
 fn main() -> Result<(), anyhow::Error> {
     dotenvy::dotenv()?;
@@ -22,8 +25,11 @@ fn main() -> Result<(), anyhow::Error> {
         Commands::Template { day } => {
             let mut file = File::create(format!("./src/solns/day_{:02}.rs", day))?;
             file.write_all(solns::TEMPLATE.as_bytes())?;
-            let mut file = File::open("./src/solns/mod.rs")?;
-            file.write_all(format!("\npub use day_{:02}", day).as_bytes())?;
+            let mut file = OpenOptions::new()
+                .write(true)
+                .append(true)
+                .open("./src/solns/mod.rs")?;
+            file.write_all(format!("\npub mod day_{:02};", day).as_bytes())?;
         }
     }
 
