@@ -21,3 +21,5 @@ mod test {
 
     pub const EXAMPLE: &[u8] = b"";
 }"#;
+
+pub mod day_01;
