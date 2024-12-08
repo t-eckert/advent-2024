@@ -1,6 +1,6 @@
 pub const TEMPLATE: &str = r#"pub fn run(puzzle: &str) -> anyhow::Result<()> {
-    part1(puzzle)?;
-    part2(puzzle)?;
+    println!("Part 1: {}", part1(puzzle)?);
+    println!("Part 2: {}", part2(puzzle)?);
 
     Ok(())
 }
@@ -34,3 +34,4 @@ pub mod day_01;
 pub mod day_02;
 pub mod day_03;
 pub mod day_04;
+pub mod day_05;
